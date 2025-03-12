@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --qos=high
+#SBATCH --ntasks=1
+#SBATCH --nodelist=dlc-arceus,dlc-groudon,dlc-meowth
+#SBATCH --nodes=1
+#SBATCH --gpus-per-task=1
+#SBATCH --cpus-per-task=10
+#SBATCH --mem=80G
+#SBATCH --time=168:00:00
+#SBATCH --container-mounts=/data:/data \
+#SBATCH --container-image="doduo.umcn.nl#judithlefkes/vlfm/latest:7.0"
+
+
+python3 /data/temporary/amirhosein/AbMIL/AttentionDeepMIL/main_3fold_cv.py 
+
