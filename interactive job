@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#SBATCH --qos=low
+#SBATCH --ntasks=1
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=10
+#SBATCH --gpus-per-task=1
+#SBATCH --mem=60G
+#SBATCH --job-name=UNI_features
+#SBATCH --container-mounts=/data:/data
+#SBATCH --container-workdir=/data
+#SBATCH --time=168:00:00
+#SBATCH --container-image="doduo.umcn.nl#judithlefkes/vlfm/latest:7.0"
+
+# Set environment variables
+export UNI_CKPT_PATH="/data/temporary/nadieh/UNI-main/assets/ckpts/vit_large_patch14_224_in21k.pth"
+#export PYTHONPATH="/data/pathology/users/amirhosein/UNI"
+
+
+# Install the required packages
+pip install jupyter
+pip install --upgrade pip
+pip install faiss-gpu
+pip install timm
+pip install --upgrade ipywidgets
+pip install --upgrade notebook
+pip install --upgrade openslide-python
+pip install transformers==4.42.4 
+pip install torch==2.3.0 
+pip install einops==0.8.0 
+pip install environs==11.0.0
+pip install sacremoses==0.1.1 
+pip install xformers==0.0.26.post1
+# Start Jupyter Lab
+jupyter lab --ip=0.0.0.0 --port=7766  --no-browser
